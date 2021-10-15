@@ -7,7 +7,7 @@ type MainScreenProps = {
 }
 
 function MainScreen({promo}: MainScreenProps): JSX.Element {
-  const url = '';
+  const url = '/';
   return (
     <>
       <section className="film-card">
@@ -19,7 +19,7 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a href={url} className="logo__link">
+            <a href={'/'} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -109,7 +109,7 @@ function MainScreen({promo}: MainScreenProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a href={url} className="logo__link logo__link--light">
+            <a href={'/'} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
