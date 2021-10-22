@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Promo } from '../../types/promo';
 import { AddReviewScreen } from '../add-review-screen/add-review-screen';
 import MainScreen from '../main-screen/main-screen';
@@ -18,20 +19,20 @@ function App({ promo, isAuthorized }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={AppRoute.Main} >
           <MainScreen promo={promo} />
         </Route>
-        <Route exact path='/login'>
+        <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
         </Route>
-        <Route exact path='/films/:id' >
+        <Route exact path={AppRoute.Film} >
           <MoviePageScreen />
         </Route>
-        <Route exact path='/player/:id' >
+        <Route exact path={AppRoute.Player} >
           <PlayerScreen />
         </Route>
-        <PrivateRoute exact path='/mylist' isAuthorized={isAuthorized} component={MyListScreen} />
-        <PrivateRoute exact path='/films/:id/review' isAuthorized={isAuthorized} component={AddReviewScreen} />
+        <PrivateRoute exact path={AppRoute.MyList} isAuthorized={isAuthorized} component={MyListScreen} />
+        <PrivateRoute exact path={AppRoute.AddReview} isAuthorized={isAuthorized} component={AddReviewScreen} />
         <Route component={NotFoundScreen} />
       </Switch>
     </BrowserRouter>
