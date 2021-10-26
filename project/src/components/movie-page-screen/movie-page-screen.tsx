@@ -1,5 +1,7 @@
+import { Footer } from '../footer/footer';
+import { Logo } from '../logo/logo';
+
 export function MoviePageScreen(): JSX.Element {
-  const url='';
   return (
     <>
       <section className="film-card film-card--full">
@@ -11,13 +13,7 @@ export function MoviePageScreen(): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a href={'/'} className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo isHeader />
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -26,7 +22,7 @@ export function MoviePageScreen(): JSX.Element {
                 </div>
               </li>
               <li className="user-block__item">
-                <a href={url} className="user-block__link">Sign out</a>
+                <a href={'/'} className="user-block__link">Sign out</a>
               </li>
             </ul>
           </header>
@@ -68,13 +64,13 @@ export function MoviePageScreen(): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item film-nav__item--active">
-                    <a href={url}  className="film-nav__link">Overview</a>
+                    <a href={'/'}  className="film-nav__link">Overview</a>
                   </li>
                   <li className="film-nav__item">
-                    <a href={url}  className="film-nav__link">Details</a>
+                    <a href={'/'}  className="film-nav__link">Details</a>
                   </li>
                   <li className="film-nav__item">
-                    <a href={url}  className="film-nav__link">Reviews</a>
+                    <a href={'/'}  className="film-nav__link">Reviews</a>
                   </li>
                 </ul>
               </nav>
@@ -143,6 +139,7 @@ export function MoviePageScreen(): JSX.Element {
             </article>
           </div>
         </section>
+        <Footer />
       </div>
     </>
   );

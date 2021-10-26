@@ -1,17 +1,14 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { Logo } from '../logo/logo';
+
 export function HeaderGuest(): JSX.Element {
-  const url = '';
   return (
     <header className="page-header">
-      <div className="logo">
-        <a href={url} className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      </div>
+      <Logo isHeader />
 
       <div className="user-block">
-        <a href="sign-in.html" className="user-block__link">Sign in</a>
+        <Link className="user-block__link" to={AppRoute.SignIn} >Sign in</Link>
       </div>
     </header>
   );
