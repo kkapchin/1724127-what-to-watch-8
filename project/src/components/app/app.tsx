@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
+import { getFilmById } from '../../utils';
 import { AddReviewScreen } from '../add-review-screen/add-review-screen';
 import MainScreen from '../main-screen/main-screen';
 import { MoviePageScreen } from '../movie-page-screen/movie-page-screen';
@@ -15,10 +16,11 @@ type AppScreenProps = {
   promo: Promo,
   films: Films,
   favorites: Films,
+  similar: Films,
   isAuthorized: boolean,
 }
 
-function App({ promo, films, favorites, isAuthorized }: AppScreenProps): JSX.Element {
+function App({ promo, films, favorites, similar, isAuthorized }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -29,7 +31,7 @@ function App({ promo, films, favorites, isAuthorized }: AppScreenProps): JSX.Ele
           <SignInScreen />
         </Route>
         <Route exact path={AppRoute.Film} >
-          <MoviePageScreen />
+          <MoviePageScreen film={getFilmById(window.location.pathname)} similar={similar} />
         </Route>
         <Route exact path={AppRoute.Player} >
           <PlayerScreen />
