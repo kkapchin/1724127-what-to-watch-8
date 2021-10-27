@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Film } from '../../types/films';
 import { Logo } from '../logo/logo';
+import { RatingStars } from '../rating-stars/rating-stars';
+
+const DECIMAL_RADIX = 10;
 
 type AddReviewScreenProps = {
   film: Film,
@@ -8,6 +12,9 @@ type AddReviewScreenProps = {
 
 export function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
   const url = '';
+  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(8);
+  console.log(rating)
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -50,42 +57,22 @@ export function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
 
       <div className="add-review">
         <form action="#" className="add-review__form">
-          <div className="rating">
-            <div className="rating__stars">
-              <input className="rating__input" id="star-10" type="radio" name="rating" value="10" />
-              <label className="rating__label" htmlFor="star-10">Rating 10</label>
-
-              <input className="rating__input" id="star-9" type="radio" name="rating" value="9" />
-              <label className="rating__label" htmlFor="star-9">Rating 9</label>
-
-              <input className="rating__input" id="star-8" type="radio" name="rating" value="8" checked />
-              <label className="rating__label" htmlFor="star-8">Rating 8</label>
-
-              <input className="rating__input" id="star-7" type="radio" name="rating" value="7" />
-              <label className="rating__label" htmlFor="star-7">Rating 7</label>
-
-              <input className="rating__input" id="star-6" type="radio" name="rating" value="6" />
-              <label className="rating__label" htmlFor="star-6">Rating 6</label>
-
-              <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
-              <label className="rating__label" htmlFor="star-5">Rating 5</label>
-
-              <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
-              <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" />
-              <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-              <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
-              <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-              <input className="rating__input" id="star-1" type="radio" name="rating" value="1" />
-              <label className="rating__label" htmlFor="star-1">Rating 1</label>
-            </div>
+          <div
+            className="rating"
+            onChange={(e) => {setRating(parseInt((e.target as HTMLInputElement).value, DECIMAL_RADIX));}}
+          >
+            <RatingStars currentRating={rating} />
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea
+              className="add-review__textarea"
+              name="review-text" id="review-text"
+              placeholder="Review text"
+              onChange={(e) => {setComment((e.target.value));}}
+              value={comment}
+            >
+            </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>

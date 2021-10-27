@@ -8,7 +8,7 @@ export enum AppRoute {
   PageNotFound = '/page-not-found',
 }
 
-export enum Genres {
+export enum Genre {
   All = 'All genres',
   Comedies = 'Comedies',
   Crime = 'Crime',
