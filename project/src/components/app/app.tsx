@@ -30,14 +30,12 @@ function App({ promo, films, favorites, similar, isAuthorized }: AppScreenProps)
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
         </Route>
-        <Route exact path={AppRoute.Film} >
-          <MoviePageScreen film={getFilmById(window.location.pathname)} similar={similar} />
-        </Route>
+        <Route exact path={AppRoute.Film} component={() => <MoviePageScreen film={getFilmById(window.location.pathname)} similar={similar} />} />
         <Route exact path={AppRoute.Player} >
           <PlayerScreen />
         </Route>
         <PrivateRoute exact path={AppRoute.MyList} isAuthorized={isAuthorized} component={() => <MyListScreen favorites={favorites} />} />
-        <PrivateRoute exact path={AppRoute.AddReview} isAuthorized={isAuthorized} component={() => <AddReviewScreen films={films} />} />
+        <PrivateRoute exact path={AppRoute.AddReview} isAuthorized={isAuthorized} component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} />} />
         <Route component={NotFoundScreen} />
       </Switch>
     </BrowserRouter>

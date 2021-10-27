@@ -1,17 +1,18 @@
-import { Films } from '../../types/films';
+import { Link } from 'react-router-dom';
+import { Film } from '../../types/films';
 import { Logo } from '../logo/logo';
 
 type AddReviewScreenProps = {
-  films: Films,
+  film: Film,
 }
 
-export function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
+export function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
   const url = '';
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -22,10 +23,10 @@ export function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link className="breadcrumbs__link" to={`/films/${film.id}`} >{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href={url} className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link" to={`/films/${film.id}/review`} >Add review</Link>
               </li>
             </ul>
           </nav>
@@ -43,7 +44,7 @@ export function AddReviewScreen({films}: AddReviewScreenProps): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
         </div>
       </div>
 

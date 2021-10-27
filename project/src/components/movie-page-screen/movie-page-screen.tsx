@@ -1,4 +1,5 @@
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
 import { FilmsList } from '../films-list/films-list';
@@ -12,7 +13,7 @@ type MoviePageScreenProps = {
 
 export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
   if(!film) {
-    <Redirect to={AppRoute.PageNotFound} />;
+    return <Redirect to={AppRoute.PageNotFound} />;
   }
 
   return (
@@ -61,7 +62,7 @@ export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Elem
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to={`/films/${film.id}/review`} >Add review</Link>
               </div>
             </div>
           </div>
