@@ -1,34 +1,16 @@
 import { Redirect, Route, RouteProps } from 'react-router';
+import { AppRoute } from '../../const';
 
-/* type PrivateRouteProps = {
-  isAuthorized: boolean,
-  component: any,
-  path: string,
-  exact: boolean,
-} */
 type PrivateRouteProps = {
-  exact: boolean,
-  path: string,
   component:() => JSX.Element,
   isAuthorized: boolean,
 } & RouteProps
-
-//const isAuthorized = false;
 
 export function PrivateRoute({ component: Component, isAuthorized, ...routeProps }: PrivateRouteProps): JSX.Element {
   return (
     <Route
       {...routeProps}
-      render={(props) => isAuthorized ? <Component {...props} /> : <Redirect to='/login' />}
+      render={(props) => isAuthorized ? <Component {...props} /> : <Redirect to={AppRoute.SignIn} />}
     />
   );
 }
-
-
-/* export function PrivateRoute({ children, isAuthorized }: PrivateRouteProps): ReactElement {
-  //console.log(props)
-  return (
-    isAuthorized ? children : <Redirect to='/login' />
-  );
-}
- */
