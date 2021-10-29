@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
@@ -12,6 +12,8 @@ type MoviePageScreenProps = {
 }
 
 export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
+  const { id } = useParams<{id?: string}>();
+
   if(!film) {
     return <Redirect to={AppRoute.PageNotFound} />;
   }
@@ -62,7 +64,7 @@ export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Elem
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link className="btn film-card__button" to={`/films/${film.id}/review`} >Add review</Link>
+                <Link className="btn film-card__button" to={`/films/${id}/review`} >Add review</Link>
               </div>
             </div>
           </div>
