@@ -5,7 +5,7 @@ import { favorites } from './mocks/favorites';
 import { films } from './mocks/films';
 import { promo } from './mocks/promo';
 import { similar } from './mocks/similar';
-import { onChangeRating, onSubmit } from './utils';
+import { onSubmit } from './utils';
 
 const isAuthorized = true;
 
@@ -18,7 +18,6 @@ ReactDOM.render(
       similar={similar}
       isAuthorized={isAuthorized}
       onSubmit={onSubmit}
-      onChangeRating={onChangeRating}
     />
   </React.StrictMode>,
   document.getElementById('root'));
