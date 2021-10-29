@@ -1,5 +1,7 @@
+import { FormEvent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { CommentPost } from '../../types/comment-post';
 import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
 import { getFilmById } from '../../utils';
@@ -18,9 +20,12 @@ type AppScreenProps = {
   favorites: Films,
   similar: Films,
   isAuthorized: boolean,
+  onSubmit: ({rating, comment}: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
+  onChangeRating: (value: string, setState: (value: number) => void) => void,
 }
 
-function App({ promo, films, favorites, similar, isAuthorized }: AppScreenProps): JSX.Element {
+function App(props: AppScreenProps): JSX.Element {
+  const {promo, films, favorites, similar, isAuthorized, onSubmit, onChangeRating} = props;
   return (
     <BrowserRouter>
       <Switch>
@@ -37,7 +42,7 @@ function App({ promo, films, favorites, similar, isAuthorized }: AppScreenProps)
         <PrivateRoute exact path={AppRoute.MyList} isAuthorized={isAuthorized} component={() => <MyListScreen favorites={favorites} />} />
         <PrivateRoute exact path={AppRoute.AddReview}
           isAuthorized={isAuthorized}
-          component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} onPost={() => {throw new Error('Function \'onPost\' isn\'t implemented.');}} />}
+          component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} onSubmit={onSubmit} onChange={onChangeRating} />}
         />
         <Route component={NotFoundScreen} />
       </Switch>

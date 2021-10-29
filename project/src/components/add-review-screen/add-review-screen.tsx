@@ -5,16 +5,17 @@ import { CommentPost } from '../../types/comment-post';
 import { Logo } from '../logo/logo';
 import { RatingStars } from '../rating-stars/rating-stars';
 
-const DECIMAL_RADIX = 10;
+const DEFAULT_RATING = 8;
 
 type AddReviewScreenProps = {
   film: Film,
-  onPost: (commentPost: CommentPost) => void,
+  onSubmit: ({rating, comment}: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
+  onChange: (value: string, setState: (value: number) => void) => void,
 }
 
-export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Element {
+export function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
   const url = '';
-  const DEFAULT_RATING = 8;
+  const {film, onSubmit, onChange} = props;
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(DEFAULT_RATING);
   return (
@@ -61,14 +62,12 @@ export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Eleme
         <form
           className="add-review__form"
           onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            onPost({rating, comment});}}
+            onSubmit({rating, comment}, evt);}}
         >
           <div
             className="rating"
             onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const value = parseInt(target.value, DECIMAL_RADIX);
-              setRating(value);
+              onChange(target.value, setRating);
             }}
           >
             <RatingStars currentRating={rating} />
