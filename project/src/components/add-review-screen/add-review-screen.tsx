@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Film } from '../../types/films';
+import { CommentPost } from '../../types/comment-post';
 import { Logo } from '../logo/logo';
 import { RatingStars } from '../rating-stars/rating-stars';
 
@@ -8,13 +9,14 @@ const DECIMAL_RADIX = 10;
 
 type AddReviewScreenProps = {
   film: Film,
+  onPost: (commentPost: CommentPost) => void,
 }
 
-export function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
+export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Element {
   const url = '';
+  const DEFAULT_RATING = 8;
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(8);
-  console.log(rating)
+  const [rating, setRating] = useState(DEFAULT_RATING);
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -56,10 +58,18 @@ export function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form">
+        <form
+          className="add-review__form"
+          onSubmit={(evt: FormEvent<HTMLFormElement>) => {
+            evt.preventDefault();
+            onPost({rating, comment});}}
+        >
           <div
             className="rating"
-            onChange={(e) => {setRating(parseInt((e.target as HTMLInputElement).value, DECIMAL_RADIX));}}
+            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
+              const value = parseInt(target.value, DECIMAL_RADIX);
+              setRating(value);
+            }}
           >
             <RatingStars currentRating={rating} />
           </div>

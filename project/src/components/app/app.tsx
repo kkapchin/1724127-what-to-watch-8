@@ -35,7 +35,10 @@ function App({ promo, films, favorites, similar, isAuthorized }: AppScreenProps)
           <PlayerScreen />
         </Route>
         <PrivateRoute exact path={AppRoute.MyList} isAuthorized={isAuthorized} component={() => <MyListScreen favorites={favorites} />} />
-        <PrivateRoute exact path={AppRoute.AddReview} isAuthorized={isAuthorized} component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} />} />
+        <PrivateRoute exact path={AppRoute.AddReview}
+          isAuthorized={isAuthorized}
+          component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} onPost={() => {throw new Error('Function \'onPost\' isn\'t implemented.');}} />}
+        />
         <Route component={NotFoundScreen} />
       </Switch>
     </BrowserRouter>
