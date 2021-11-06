@@ -9,6 +9,19 @@ export const getFilmById = (pathname: string): Film => {
   const id = parseInt(pathname.split('/')[2], DECIMAL_RADIX);
   const film = films.filter((element): Film | boolean => element.id === id)[0];
   return film;
+  /* if(id) {
+    const film = films.filter((element): Film | boolean => element.id === parseInt(id, DECIMAL_RADIX))[0];
+    return film;
+  }
+  return {} as Film; */
+};
+
+export const getFilm = (id: string): Film => {
+  if(id) {
+    const film = films.filter((element): Film | boolean => element.id === parseInt(id, DECIMAL_RADIX))[0];
+    return film;
+  }
+  return {} as Film;
 };
 
 const onPost = (commentPost: CommentPost) => {

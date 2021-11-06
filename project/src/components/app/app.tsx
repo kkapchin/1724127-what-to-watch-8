@@ -1,13 +1,14 @@
 import { FormEvent } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//import { RouteComponentProps } from 'react-router';
+import { BrowserRouter, Route, Switch, RouteComponentProps } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { CommentPost } from '../../types/comment-post';
 import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
-import { getFilmById } from '../../utils';
+import { getFilm, getFilmById } from '../../utils';
 import { AddReviewScreen } from '../add-review-screen/add-review-screen';
 import MainScreen from '../main-screen/main-screen';
-import { MoviePageScreen } from '../movie-page-screen/movie-page-screen';
+import MoviePageScreen from '../movie-page-screen/movie-page-screen';
 import { MyListScreen } from '../my-list-screen/my-list-screen';
 import { NotFoundScreen } from '../not-found-screen/not-found-screen';
 import { PlayerScreen } from '../player-screen/player-screen';
@@ -25,6 +26,7 @@ type AppScreenProps = {
 
 function App(props: AppScreenProps): JSX.Element {
   const {promo, films, favorites, similar, isAuthorized, onSubmit} = props;
+
   return (
     <BrowserRouter>
       <Switch>
@@ -34,7 +36,7 @@ function App(props: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.SignIn}>
           <SignInScreen />
         </Route>
-        <Route exact path={AppRoute.Film} component={() => <MoviePageScreen film={getFilmById(window.location.pathname)} similar={similar} />} />
+        <Route exact path={AppRoute.Film} component={({match}: RouteComponentProps<{id: string}>) => <MoviePageScreen film={getFilm(match.params.id)} similar={similar} />} />
         <Route exact path={AppRoute.Player} >
           <PlayerScreen />
         </Route>

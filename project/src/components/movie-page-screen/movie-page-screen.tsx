@@ -1,4 +1,4 @@
-import { Redirect, useParams } from 'react-router';
+import { Redirect, RouteComponentProps, useParams, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
@@ -9,9 +9,9 @@ import { Logo } from '../logo/logo';
 type MoviePageScreenProps = {
   film: Film,
   similar: Films,
-}
+} & RouteComponentProps
 
-export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
+function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
   const { id } = useParams<{id?: string}>();
 
   if(!film) {
@@ -124,3 +124,5 @@ export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Elem
     </>
   );
 }
+
+export default withRouter(MoviePageScreen);
