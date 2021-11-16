@@ -1,7 +1,10 @@
+import { RouteComponentProps, withRouter } from 'react-router';
 import { AppRoute } from '../../const';
 import { Logo } from '../logo/logo';
 
-export function Header(): JSX.Element {
+type HeaderProps = RouteComponentProps;
+
+function Header(props: HeaderProps): JSX.Element {
   return (
     <header className="page-header film-card__head">
       <Logo isHeader />
@@ -19,3 +22,5 @@ export function Header(): JSX.Element {
     </header>
   );
 }
+
+export default withRouter(Header);

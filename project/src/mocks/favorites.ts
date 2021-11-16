@@ -1,6 +1,6 @@
 import { Films } from '../types/films';
 
-export const favorites:Films = [
+export const favorites: Films = [
   {
     id: 2,
     name: 'Fantastic Beasts: The Crimes of Grindelwald',

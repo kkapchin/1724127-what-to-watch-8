@@ -1,22 +1,24 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-//import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Route, useRouteMatch } from 'react-router';
 import { Film } from '../../types/films';
 import { CommentPost } from '../../types/comment-post';
 import { Logo } from '../logo/logo';
 import { RatingStars } from '../rating-stars/rating-stars';
 import { DECIMAL_RADIX } from '../../const';
+import { NotFoundScreen } from '../not-found-screen/not-found-screen';
 
 const DEFAULT_RATING = 8;
 
 type AddReviewScreenProps = {
-  film: Film,
+  getFilm: (id: string) => Film,
   onSubmit: ({rating, comment}: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
 }
 
-export function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen({getFilm, onSubmit }: AddReviewScreenProps): JSX.Element {
   const url = '';
-  const {film, onSubmit} = props;
+  const match = useRouteMatch<{id: string}>();
+  const film = getFilm(match.params.id);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(DEFAULT_RATING);
 
@@ -32,6 +34,10 @@ export function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
   const handleCommentChange = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(target.value);
   };
+
+  if(!film) {
+    return <Route component={NotFoundScreen} />;
+  }
 
   return (
     <section className="film-card film-card--full">
@@ -105,3 +111,5 @@ export function AddReviewScreen(props: AddReviewScreenProps): JSX.Element {
     </section>
   );
 }
+
+export default AddReviewScreen;

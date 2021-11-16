@@ -1,12 +1,11 @@
 import { FormEvent } from 'react';
 //import { RouteComponentProps } from 'react-router';
-import { BrowserRouter, Route, Switch, RouteComponentProps } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { CommentPost } from '../../types/comment-post';
-import { Films } from '../../types/films';
+import { Film, Films } from '../../types/films';
 import { Promo } from '../../types/promo';
-import { getFilm, getFilmById } from '../../utils';
-import { AddReviewScreen } from '../add-review-screen/add-review-screen';
+import AddReviewScreen from '../add-review-screen/add-review-screen';
 import MainScreen from '../main-screen/main-screen';
 import MoviePageScreen from '../movie-page-screen/movie-page-screen';
 import { MyListScreen } from '../my-list-screen/my-list-screen';
@@ -18,37 +17,36 @@ import { SignInScreen } from '../sign-in-screen/sign-in-screen';
 type AppScreenProps = {
   promo: Promo,
   films: Films,
-  favorites: Films,
+  getFavorites: (id: string) => Films,
   similar: Films,
   isAuthorized: boolean,
-  onSubmit: ({rating, comment}: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
+  onSubmit: ({ rating, comment }: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
+  getFilm: (id: string) => Film,
 }
 
-function App(props: AppScreenProps): JSX.Element {
-  const {promo, films, favorites, similar, isAuthorized, onSubmit} = props;
+function App(appProps: AppScreenProps): JSX.Element {
+  const { promo, films, getFavorites, similar, isAuthorized, onSubmit, getFilm } = appProps;
 
   return (
-    <BrowserRouter>
+    <Router>
       <Switch>
-        <Route exact path={AppRoute.Main} >
-          <MainScreen promo={promo} films={films} />
-        </Route>
-        <Route exact path={AppRoute.SignIn}>
-          <SignInScreen />
-        </Route>
-        <Route exact path={AppRoute.Film} component={({match}: RouteComponentProps<{id: string}>) => <MoviePageScreen film={getFilm(match.params.id)} similar={similar} />} />
-        <Route exact path={AppRoute.Player} >
-          <PlayerScreen />
-        </Route>
-        <PrivateRoute exact path={AppRoute.MyList} isAuthorized={isAuthorized} component={() => <MyListScreen favorites={favorites} />} />
-        <PrivateRoute exact path={AppRoute.AddReview}
+        <Route exact path={AppRoute.Main} component={() => <MainScreen promo={promo} films={films} />} />
+        <Route path={AppRoute.SignIn} component={SignInScreen} />
+        <Route exact path={AppRoute.Film} render={() => <MoviePageScreen getFilm={getFilm} similar={similar} />} />
+        <Route exact path={AppRoute.Player} component={PlayerScreen} />
+        <PrivateRoute
+          exact path={AppRoute.MyList}
           isAuthorized={isAuthorized}
-          component={() => <AddReviewScreen film={getFilmById(window.location.pathname)} onSubmit={onSubmit} />}
+          render={() => <MyListScreen getFavorites={getFavorites} />}
+        />
+        <PrivateRoute
+          exact path={AppRoute.AddReview}
+          isAuthorized={isAuthorized}
+          render={() => <AddReviewScreen getFilm={getFilm} onSubmit={onSubmit} />}
         />
         <Route component={NotFoundScreen} />
       </Switch>
-    </BrowserRouter>
-
+    </Router>
   );
 }
 

@@ -1,9 +1,9 @@
 import { FormEvent } from 'react';
 import { DECIMAL_RADIX } from './const';
+import { favorites } from './mocks/favorites';
 import { films } from './mocks/films';
 import { CommentPost } from './types/comment-post';
-import { Film } from './types/films';
-
+import { Film, Films } from './types/films';
 
 export const getFilmById = (pathname: string): Film => {
   const id = parseInt(pathname.split('/')[2], DECIMAL_RADIX);
@@ -22,6 +22,13 @@ export const getFilm = (id: string): Film => {
     return film;
   }
   return {} as Film;
+};
+
+export const getFavorites = (id: string): Films => {
+  if(id) {
+    return favorites;
+  }
+  return {} as Films;
 };
 
 const onPost = (commentPost: CommentPost) => {

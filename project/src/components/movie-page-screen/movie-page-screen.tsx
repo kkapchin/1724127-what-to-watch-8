@@ -1,4 +1,4 @@
-import { Redirect, RouteComponentProps, useParams, withRouter } from 'react-router';
+import { Redirect, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
@@ -7,13 +7,14 @@ import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
 
 type MoviePageScreenProps = {
-  film: Film,
+  getFilm: (id: string) => Film,
   similar: Films,
-} & RouteComponentProps
+}
 
-function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
-  const { id } = useParams<{id?: string}>();
-
+function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
+  const {getFilm, similar} = props;
+  const match = useRouteMatch<{id: string}>();
+  const film = getFilm(match.params.id);
   if(!film) {
     return <Redirect to={AppRoute.PageNotFound} />;
   }
@@ -64,7 +65,7 @@ function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link className="btn film-card__button" to={`/films/${id}/review`} >Add review</Link>
+                <Link className="btn film-card__button" to={`/films/${film.id}/review`} >Add review</Link>
               </div>
             </div>
           </div>
@@ -125,4 +126,4 @@ function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
   );
 }
 
-export default withRouter(MoviePageScreen);
+export default MoviePageScreen;
