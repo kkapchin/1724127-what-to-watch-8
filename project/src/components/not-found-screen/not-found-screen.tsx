@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Footer } from '../footer/footer';
-import { Header } from '../header/header';
+import Header from '../header/header';
 
 export function NotFoundScreen(): JSX.Element {
   return (

@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router';
+import { Redirect, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
@@ -7,11 +7,14 @@ import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
 
 type MoviePageScreenProps = {
-  film: Film,
+  getFilm: (id: string) => Film,
   similar: Films,
 }
 
-export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Element {
+function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
+  const {getFilm, similar} = props;
+  const match = useRouteMatch<{id: string}>();
+  const film = getFilm(match.params.id);
   if(!film) {
     return <Redirect to={AppRoute.PageNotFound} />;
   }
@@ -122,3 +125,5 @@ export function MoviePageScreen({film, similar}: MoviePageScreenProps): JSX.Elem
     </>
   );
 }
+
+export default MoviePageScreen;

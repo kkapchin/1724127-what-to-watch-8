@@ -1,22 +1,44 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Route, useRouteMatch } from 'react-router';
 import { Film } from '../../types/films';
 import { CommentPost } from '../../types/comment-post';
 import { Logo } from '../logo/logo';
 import { RatingStars } from '../rating-stars/rating-stars';
+import { DECIMAL_RADIX } from '../../const';
+import { NotFoundScreen } from '../not-found-screen/not-found-screen';
 
-const DECIMAL_RADIX = 10;
+const DEFAULT_RATING = 8;
 
 type AddReviewScreenProps = {
-  film: Film,
-  onPost: (commentPost: CommentPost) => void,
+  getFilm: (id: string) => Film,
+  onSubmit: ({rating, comment}: CommentPost, evt: FormEvent<HTMLFormElement>) => void,
 }
 
-export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen({getFilm, onSubmit }: AddReviewScreenProps): JSX.Element {
   const url = '';
-  const DEFAULT_RATING = 8;
+  const match = useRouteMatch<{id: string}>();
+  const film = getFilm(match.params.id);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(DEFAULT_RATING);
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    onSubmit({rating, comment}, evt);
+  };
+
+  const handleRatingChange = ({target}: ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(target.value, DECIMAL_RADIX);
+    setRating(value);
+  };
+
+  const handleCommentChange = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(target.value);
+  };
+
+  if(!film) {
+    return <Route component={NotFoundScreen} />;
+  }
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -60,16 +82,11 @@ export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Eleme
       <div className="add-review">
         <form
           className="add-review__form"
-          onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-            evt.preventDefault();
-            onPost({rating, comment});}}
+          onSubmit={handleFormSubmit}
         >
           <div
             className="rating"
-            onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-              const value = parseInt(target.value, DECIMAL_RADIX);
-              setRating(value);
-            }}
+            onChange={handleRatingChange}
           >
             <RatingStars currentRating={rating} />
           </div>
@@ -79,7 +96,7 @@ export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Eleme
               className="add-review__textarea"
               name="review-text" id="review-text"
               placeholder="Review text"
-              onChange={(e) => {setComment((e.target.value));}}
+              onChange={handleCommentChange}
               value={comment}
             >
             </textarea>
@@ -94,3 +111,5 @@ export function AddReviewScreen({film, onPost}: AddReviewScreenProps): JSX.Eleme
     </section>
   );
 }
+
+export default AddReviewScreen;

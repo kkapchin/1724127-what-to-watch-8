@@ -1,6 +1,7 @@
+import { RouteComponentProps } from 'react-router';
 import { Footer } from '../footer/footer';
 
-export function SignInScreen(): JSX.Element {
+export function SignInScreen(props: RouteComponentProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

@@ -3,7 +3,7 @@ import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
 import { FilmsList } from '../films-list/films-list';
 import { Footer } from '../footer/footer';
-import { Header } from '../header/header';
+import Header from '../header/header';
 import PromoScreen from '../promo-screen/promo-screen';
 
 type MainScreenProps = {

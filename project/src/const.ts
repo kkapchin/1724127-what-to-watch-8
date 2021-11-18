@@ -20,3 +20,5 @@ export enum Genre {
   SciFi = 'Sci-Fi',
   Thrillers = 'Thrillers',
 }
+
+export const DECIMAL_RADIX = 10;
