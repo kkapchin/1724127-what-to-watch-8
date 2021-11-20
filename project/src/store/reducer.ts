@@ -5,7 +5,7 @@ import { State } from '../types/state';
 
 const initialState = {
   genre: Genre.Default,
-  films: films,
+  films,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -15,9 +15,9 @@ const reducer = (state: State = initialState, action: Actions): State => {
         ...state,
         genre: action.payload,
         films:
-          state.genre === Genre.Default
+          action.payload === Genre.Default
             ? films
-            : films.filter((film) => film.genre === state.genre)};
+            : films.filter((film) => film.genre === action.payload)};
     default:
       return state;
   }

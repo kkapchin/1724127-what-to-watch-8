@@ -1,6 +1,6 @@
 import { useRouteMatch } from 'react-router';
 import { Films } from '../../types/films';
-import { FilmsList } from '../films-list/films-list';
+import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import Header from '../header/header';
 

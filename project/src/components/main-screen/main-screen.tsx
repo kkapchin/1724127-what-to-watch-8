@@ -1,7 +1,7 @@
 import { Genre } from '../../const';
 import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
-import { FilmsList } from '../films-list/films-list';
+import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import GenresList from '../genres-list/genres-list';
 import Header from '../header/header';
@@ -33,7 +33,7 @@ function MainScreen({promo, films}: MainScreenProps): JSX.Element {
 
           <GenresList genres={genres} />
 
-          <FilmsList films={films} />
+          <FilmsList />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

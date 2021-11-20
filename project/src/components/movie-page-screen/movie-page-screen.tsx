@@ -2,7 +2,7 @@ import { Redirect, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Film, Films } from '../../types/films';
-import { FilmsList } from '../films-list/films-list';
+import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
 
