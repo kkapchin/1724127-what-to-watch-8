@@ -1,5 +1,4 @@
 import { FormEvent } from 'react';
-//import { RouteComponentProps } from 'react-router';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { CommentPost } from '../../types/comment-post';

@@ -12,6 +12,14 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
 
   const url = `/films/${film.id}`;
 
+  const handleMouseEnter = () => {
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
+
   return (
     <article className="small-film-card catalog__films-card">
       <VideoPlayer
@@ -20,12 +28,8 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
         name={film.name}
         url={url}
         isPlaying={isPlaying}
-        onMouseEnter={() => {
-          setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-        }}
-        onMouseLeave={() => {
-          setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
     </article>
   );
