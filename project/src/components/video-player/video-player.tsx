@@ -14,14 +14,14 @@ type VideoPlayerProps = {
 
 export default function VideoPlayer({ src, poster, name, url, isPlaying, onMouseEnter, onMouseLeave }: VideoPlayerProps): JSX.Element {
 
-  function onMouseEnterHandler(): void {
+  function handleMouseEnter(): void {
     setTimeout(onMouseEnter, DELAY);
   }
 
   return (
     <Link className="small-film-card__link" to={url}>
       <div
-        onMouseEnter={onMouseEnterHandler}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={onMouseLeave}
       >
         <div className="small-film-card__image">

@@ -20,7 +20,7 @@ type ConnectedComponentProps = FilmsListProps | propsFromRedux;
 function FilmsList({ films }: ConnectedComponentProps): JSX.Element {
   return (
     <div className="catalog__films-list">
-      {films?.map((film: Film) => <FilmCard key={film.id} film={film} />)}
+      {films ? films.map((film: Film) => <FilmCard key={film.id} film={film} />) : ''}
     </div>
   );
 }
