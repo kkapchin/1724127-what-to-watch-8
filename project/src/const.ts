@@ -9,7 +9,7 @@ export enum AppRoute {
 }
 
 export enum Genre {
-  All = 'All genres',
+  Default = 'All genres',
   Comedies = 'Comedies',
   Crime = 'Crime',
   Documentary = 'Documentary',
@@ -22,3 +22,16 @@ export enum Genre {
 }
 
 export const DECIMAL_RADIX = 10;
+
+export const genres = [
+  'All genres',
+  'Comedies',
+  'Crime',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci-Fi',
+  'Thrillers',
+];
