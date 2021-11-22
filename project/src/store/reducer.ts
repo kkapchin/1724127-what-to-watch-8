@@ -1,11 +1,16 @@
 import { Genre } from '../const';
 import { films } from '../mocks/films';
+import { favorites } from '../mocks/favorites';
+import { similars } from '../mocks/similars';
 import { Actions, ActionType } from '../types/action';
 import { State } from '../types/state';
 
 const initialState = {
-  genre: Genre.Default,
-  films,
+  currentGenre: Genre.Default,
+  genresList: [...new Set([Genre.Default, ...films.map((film) => film.genre)])],
+  films: films.slice(),
+  favorites: favorites.slice(),
+  similars: similars.slice(),
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -13,7 +18,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.switchGenre:
       return {
         ...state,
-        genre: action.payload,
+        currentGenre: action.payload,
         films:
           action.payload === Genre.Default
             ? films

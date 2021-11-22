@@ -1,4 +1,4 @@
-import { useRouteMatch } from 'react-router';
+import { FilmsListCategory } from '../../const';
 import { Films } from '../../types/films';
 import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
@@ -11,7 +11,7 @@ type MyListScreenProps = {
 }
 
 export function MyListScreen({ getFavorites }: MyListScreenProps): JSX.Element {
-  const match = useRouteMatch<{id: string}>();
+  //const match = useRouteMatch<{id: string}>();
   return (
     <div className="user-page">
       <Header />
@@ -19,7 +19,7 @@ export function MyListScreen({ getFavorites }: MyListScreenProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList favorites={getFavorites(match.params.id)} filmsCount={FAVORITES_COUNT} />
+        <FilmsList filmsCount={FAVORITES_COUNT} filmsListCategory={FilmsListCategory.Favorites} />
       </section>
 
       <Footer />

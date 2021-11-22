@@ -6,8 +6,7 @@ type FilmCardProps = {
   film: Film,
 }
 
-function FilmCard({film}: FilmCardProps): JSX.Element {
-
+function FilmCard({ film }: FilmCardProps): JSX.Element {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const url = `/films/${film.id}`;
@@ -23,7 +22,7 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <VideoPlayer
-        src={film.videoLink}
+        src={film.previewVideoLink}
         poster={film.posterImage}
         name={film.name}
         url={url}

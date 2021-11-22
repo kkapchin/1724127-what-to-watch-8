@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AppRoute, Genre } from '../../const';
 
 type GenresItemProps = {
@@ -18,7 +18,12 @@ export default function GenresItem({ onGenreItemClick, genre, isActive }: Genres
       className={`catalog__genres-item ${isActive ? 'catalog__genres-item--active' : ''}`}
       onClick={handleGenreItemClick}
     >
-      <Link to={AppRoute.Main} className="catalog__genres-link">{genre}</Link>
+      <NavLink
+        to={AppRoute.Main}
+        className="catalog__genres-link"
+      >
+        {genre}
+      </NavLink>
     </li>
   );
 }

@@ -29,7 +29,7 @@ function App(appProps: AppScreenProps): JSX.Element {
   return (
     <Router>
       <Switch>
-        <Route exact path={AppRoute.Main} component={() => <MainScreen promo={promo} films={films} />} />
+        <Route exact path={AppRoute.Main} component={() => <MainScreen promo={promo} />} />
         <Route path={AppRoute.SignIn} component={SignInScreen} />
         <Route exact path={AppRoute.Film} render={() => <MoviePageScreen getFilm={getFilm} similar={similar} />} />
         <Route exact path={AppRoute.Player} component={PlayerScreen} />

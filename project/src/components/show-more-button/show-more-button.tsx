@@ -1,6 +1,6 @@
 type ShowMoreButtonProps = {
   onButtonClick: () => void,
-  isActive: boolean,
+  isActive: () => boolean,
 }
 
 function ShowMoreButton({ onButtonClick, isActive }: ShowMoreButtonProps): JSX.Element | null {
@@ -9,7 +9,7 @@ function ShowMoreButton({ onButtonClick, isActive }: ShowMoreButtonProps): JSX.E
     onButtonClick();
   };
 
-  if(!isActive) {
+  if(!isActive()) {
     return null;
   }
 

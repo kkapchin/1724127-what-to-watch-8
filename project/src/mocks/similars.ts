@@ -1,6 +1,6 @@
 import { Films } from '../types/films';
 
-export const similar:Films = [
+export const similars:Films = [
   {
     id: 10,
     name: 'Shutter Island',

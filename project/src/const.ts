@@ -22,3 +22,9 @@ export enum Genre {
 }
 
 export const DECIMAL_RADIX = 10;
+
+export enum FilmsListCategory {
+  Default = 'Default',
+  Favorites = 'Favorites',
+  Similars = 'Similars',
+}
