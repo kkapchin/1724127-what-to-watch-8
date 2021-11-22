@@ -6,6 +6,8 @@ import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
 
+const SIMILARS_COUNT = 4;
+
 type MoviePageScreenProps = {
   getFilm: (id: string) => Film,
   similar: Films,
@@ -118,7 +120,7 @@ function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={similar} />
+          <FilmsList similars={similar} filmsCount={SIMILARS_COUNT} />
         </section>
         <Footer />
       </div>

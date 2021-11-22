@@ -4,20 +4,13 @@ import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Actions } from '../../types/action';
 import { switchGenre } from '../../store/action';
-import React from 'react';
 
 const mapStateToProps = ({genre}: State) => ({
   currentGenre: genre,
 });
 
-/* const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onUserAnswer() {
-    dispatch(incrementStep());
-  },
-}); */
-
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onGenreItemClick: (newGenre: string | null) => dispatch(switchGenre(newGenre)),
+  onGenreItemClick: (newGenre: string) => dispatch(switchGenre(newGenre)),
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

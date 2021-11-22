@@ -1,20 +1,46 @@
+import { useEffect, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { Genre } from '../../const';
 import { Films } from '../../types/films';
 import { Promo } from '../../types/promo';
+import { State } from '../../types/state';
 import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import GenresList from '../genres-list/genres-list';
 import Header from '../header/header';
 import PromoScreen from '../promo-screen/promo-screen';
+import ShowMoreButton from '../show-more-button/show-more-button';
+
+const DEFAULT_FILMS_COUNT = 8;
+const FILMS_COUNT_INCREMENT = DEFAULT_FILMS_COUNT;
+
+const mapStateToProps = ({ genre }: State) => ({
+  currentGenre: genre,
+});
+
+const connector = connect(mapStateToProps);
+
+type propsFromRedux = ConnectedProps<typeof connector>;
 
 type MainScreenProps = {
   promo: Promo,
   films: Films,
 }
 
-function MainScreen({promo, films}: MainScreenProps): JSX.Element {
+type ConnectedComponentProps = MainScreenProps & propsFromRedux;
 
+function MainScreen(props: ConnectedComponentProps): JSX.Element {
+  console.log(props)
+  const {promo, films, currentGenre} = props;
+  const [filmsCount, setFilmsCount] = useState(DEFAULT_FILMS_COUNT);
+  useEffect(() => setFilmsCount(DEFAULT_FILMS_COUNT), [currentGenre]);
   const [...genres] = new Set([Genre.Default, ...films.map((film) => film.genre)]);
+
+  const isButtonActive = filmsCount < films.length;
+
+  const onButtonClick = () => {
+    setFilmsCount(filmsCount + FILMS_COUNT_INCREMENT);
+  };
 
   return (
     <>
@@ -33,11 +59,9 @@ function MainScreen({promo, films}: MainScreenProps): JSX.Element {
 
           <GenresList genres={genres} />
 
-          <FilmsList />
+          <FilmsList filmsCount={filmsCount} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton isActive={isButtonActive} onButtonClick={onButtonClick} />
         </section>
 
         <Footer />
@@ -46,4 +70,4 @@ function MainScreen({promo, films}: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default connector(MainScreen);
