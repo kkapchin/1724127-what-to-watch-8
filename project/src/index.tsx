@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './components/app/app';
-import { films } from './mocks/films';
 import { promo } from './mocks/promo';
 import { similars } from './mocks/similars';
 import { reducer } from './store/reducer';
@@ -22,7 +21,6 @@ ReactDOM.render(
     <Provider store={store}>
       <App
         promo={promo}
-        films={films}
         getFavorites={getFavorites}
         similar={similars}
         isAuthorized={isAuthorized}
