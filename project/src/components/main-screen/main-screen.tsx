@@ -32,7 +32,7 @@ type ConnectedComponentProps = MainScreenProps & propsFromRedux;
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const {promo, films, currentGenre} = props;
   const [filmsCount, setFilmsCount] = useState(DEFAULT_FILMS_COUNT);
-  useEffect(() => setFilmsCount(DEFAULT_FILMS_COUNT), [currentGenre]);
+  useEffect(() => () => setFilmsCount(DEFAULT_FILMS_COUNT), [currentGenre]);
 
   const isButtonActive = () => filmsCount < films.length;
 
