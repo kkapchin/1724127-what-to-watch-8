@@ -1,10 +1,12 @@
 import { Redirect, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, FilmsListCategory } from '../../const';
 import { Film, Films } from '../../types/films';
 import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
+
+const SIMILARS_COUNT = 4;
 
 type MoviePageScreenProps = {
   getFilm: (id: string) => Film,
@@ -12,7 +14,7 @@ type MoviePageScreenProps = {
 }
 
 function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
-  const {getFilm, similar} = props;
+  const {getFilm} = props;
   const match = useRouteMatch<{id: string}>();
   const film = getFilm(match.params.id);
   if(!film) {
@@ -118,7 +120,7 @@ function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={similar} />
+          <FilmsList filmsCount={SIMILARS_COUNT} filmsListCategory={FilmsListCategory.Similars} />
         </section>
         <Footer />
       </div>

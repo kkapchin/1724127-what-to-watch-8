@@ -15,7 +15,6 @@ import { SignInScreen } from '../sign-in-screen/sign-in-screen';
 
 type AppScreenProps = {
   promo: Promo,
-  films: Films,
   getFavorites: (id: string) => Films,
   similar: Films,
   isAuthorized: boolean,
@@ -24,12 +23,12 @@ type AppScreenProps = {
 }
 
 function App(appProps: AppScreenProps): JSX.Element {
-  const { promo, films, getFavorites, similar, isAuthorized, onSubmit, getFilm } = appProps;
+  const { promo, getFavorites, similar, isAuthorized, onSubmit, getFilm } = appProps;
 
   return (
     <Router>
       <Switch>
-        <Route exact path={AppRoute.Main} component={() => <MainScreen promo={promo} films={films} />} />
+        <Route exact path={AppRoute.Main} component={() => <MainScreen promo={promo} />} />
         <Route path={AppRoute.SignIn} component={SignInScreen} />
         <Route exact path={AppRoute.Film} render={() => <MoviePageScreen getFilm={getFilm} similar={similar} />} />
         <Route exact path={AppRoute.Player} component={PlayerScreen} />

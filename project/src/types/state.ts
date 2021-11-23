@@ -1,6 +1,9 @@
 import { Films } from './films';
 
 export type State = {
-  genre: string | null,
+  currentGenre: string | null,
+  genresList: string[],
   films: Films,
+  favorites: Films,
+  similars: Films,
 }
