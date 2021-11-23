@@ -1,10 +1,18 @@
 export enum ActionType {
   switchGenre = 'genre/switchGenre',
+  getComments = 'movie/getComments',
 }
 
 export type switchGenreAction = {
   type: ActionType.switchGenre,
-  payload: string | null,
+  payload: string,
 }
 
-export type Actions = switchGenreAction;
+export type getCommentsAction = {
+  type: ActionType.getComments,
+  payload: number,
+}
+
+export type Actions =
+  | switchGenreAction
+  | getCommentsAction;

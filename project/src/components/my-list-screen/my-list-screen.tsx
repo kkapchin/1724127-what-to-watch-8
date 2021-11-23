@@ -1,4 +1,4 @@
-import { FilmsListCategory } from '../../const';
+import { FilmsCategory } from '../../const';
 import { Films } from '../../types/films';
 import FilmsList from '../films-list/films-list';
 import { Footer } from '../footer/footer';
@@ -19,7 +19,7 @@ export function MyListScreen({ getFavorites }: MyListScreenProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList filmsCount={FAVORITES_COUNT} filmsListCategory={FilmsListCategory.Favorites} />
+        <FilmsList filmsCount={FAVORITES_COUNT} filmsListCategory={FilmsCategory.Favorites} />
       </section>
 
       <Footer />

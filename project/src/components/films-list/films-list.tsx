@@ -1,5 +1,5 @@
 import { connect, ConnectedProps } from 'react-redux';
-import { FilmsListCategory } from '../../const';
+import { FilmsCategory } from '../../const';
 import { Film, Films } from '../../types/films';
 import { State } from '../../types/state';
 import FilmCard from '../film-card/film-card';
@@ -8,7 +8,7 @@ const BEGIN_INDEX = 0;
 
 type FilmsListProps = {
   filmsCount: number,
-  filmsListCategory: FilmsListCategory,
+  filmsListCategory: FilmsCategory,
 }
 
 const mapStateToProps = ({ films, favorites, similars }: State) => ({
@@ -26,10 +26,10 @@ type ConnectedComponentProps = FilmsListProps & propsFromRedux;
 function FilmsList({ filmsCount, filmsListCategory, catalog, favorites, similars }: ConnectedComponentProps): JSX.Element {
   const films: Films = [];
   switch(filmsListCategory) {
-    case FilmsListCategory.Favorites:
+    case FilmsCategory.Favorites:
       favorites.map((film: Film) => films.push(film));
       break;
-    case FilmsListCategory.Similars:
+    case FilmsCategory.Similars:
       similars.map((film: Film) => films.push(film));
       break;
     default:

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { FilmsListCategory } from '../../const';
+import { FilmsCategory } from '../../const';
 import { Promo } from '../../types/promo';
 import { State } from '../../types/state';
 import FilmsList from '../films-list/films-list';
@@ -24,7 +24,6 @@ type propsFromRedux = ConnectedProps<typeof connector>;
 
 type MainScreenProps = {
   promo: Promo,
-  //films: Films,
 }
 
 type ConnectedComponentProps = MainScreenProps & propsFromRedux;
@@ -57,7 +56,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
           <GenresList />
 
-          <FilmsList filmsCount={filmsCount} filmsListCategory={FilmsListCategory.Default} />
+          <FilmsList filmsCount={filmsCount} filmsListCategory={FilmsCategory.Default} />
 
           <ShowMoreButton isActive={isButtonActive} onButtonClick={onButtonClick} />
         </section>

@@ -1,9 +1,11 @@
+import { CommentGet } from './comment-get';
 import { Films } from './films';
 
 export type State = {
   currentGenre: string | null,
-  genresList: string[],
+  genres: string[],
   films: Films,
   favorites: Films,
   similars: Films,
+  comments: CommentGet,
 }

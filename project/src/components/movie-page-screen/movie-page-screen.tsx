@@ -1,8 +1,9 @@
 import { Redirect, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
-import { AppRoute, FilmsListCategory } from '../../const';
+import { AppRoute, FilmsCategory } from '../../const';
 import { Film, Films } from '../../types/films';
 import FilmsList from '../films-list/films-list';
+import Tabs from '../tabs/tabs';
 import { Footer } from '../footer/footer';
 import { Logo } from '../logo/logo';
 
@@ -80,37 +81,9 @@ function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href={'/'}  className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href={'/'}  className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href={'/'}  className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${film.scoresCount} ratings`}</span>
-                </p>
-              </div>
+              <Tabs film={film} />
 
-              <div className="film-card__text">
-                <p>{film.description}</p>
-
-                <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                <p className="film-card__director"><strong>{`Director: ${film.director}`}</strong></p>
-
-                <p className="film-card__starring"><strong>{`Starring: ${film.starring}`}</strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -120,7 +93,7 @@ function MoviePageScreen({...props}: MoviePageScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList filmsCount={SIMILARS_COUNT} filmsListCategory={FilmsListCategory.Similars} />
+          <FilmsList filmsCount={SIMILARS_COUNT} filmsListCategory={FilmsCategory.Similars} />
         </section>
         <Footer />
       </div>

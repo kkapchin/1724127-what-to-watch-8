@@ -5,9 +5,9 @@ import { Dispatch } from 'redux';
 import { Actions } from '../../types/action';
 import { switchGenre } from '../../store/action';
 
-const mapStateToProps = ({ currentGenre, genresList }: State) => ({
+const mapStateToProps = ({ currentGenre, genres }: State) => ({
   currentGenre,
-  genresList,
+  genres,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
@@ -21,11 +21,11 @@ type propsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = propsFromRedux;
 
 function GenresList(props: ConnectedComponentProps): JSX.Element {
-  const { genresList, currentGenre, onGenreItemClick } = props;
+  const { genres, currentGenre, onGenreItemClick } = props;
 
   return (
     <ul className="catalog__genres-list">
-      {genresList.map((genre) => <GenresItem onGenreItemClick={onGenreItemClick} key={genre} genre={genre} isActive={currentGenre === genre} />)}
+      {genres.map((genre) => <GenresItem onGenreItemClick={onGenreItemClick} key={genre} genre={genre} isActive={currentGenre === genre} />)}
     </ul>
   );
 }
