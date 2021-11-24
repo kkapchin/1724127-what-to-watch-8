@@ -57,11 +57,11 @@ export const comments: CommentGet = [
       id: 6,
       name: 'Paula Fleri-Soler',
     },
-    rating: 7.6,
+    rating: 7.0,
     comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
     date: '2016-12-20T14:13:56.569Z',
   },
-  {
+  /* {
     id: 7,
     user: {
       id: 7,
@@ -121,5 +121,15 @@ export const comments: CommentGet = [
     comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
     date: '2016-12-20T14:13:56.569Z',
   },
+  {
+    id: 12,
+    user: {
+      id: 12,
+      name: 'Paula Fleri-Soler',
+    },
+    rating: 7.6,
+    comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
+    date: '2016-12-20T14:13:56.569Z',
+  }, */
 
 ];

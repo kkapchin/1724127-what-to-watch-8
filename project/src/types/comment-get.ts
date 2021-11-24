@@ -12,3 +12,5 @@ export type Comment = {
 }
 
 export type CommentGet = Comment[];
+
+//export type ParsedCommentGet = [CommentGet[]];

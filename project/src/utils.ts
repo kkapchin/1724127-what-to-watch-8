@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import { DECIMAL_RADIX } from './const';
+import { DECIMAL_RADIX, RatingLevel } from './const';
 import { comments } from './mocks/comments';
 import { favorites } from './mocks/favorites';
 import { films } from './mocks/films';
@@ -44,8 +44,35 @@ export const onChangeRating = (value: string, setState: (value: number) => void)
 
 export const onCommentGet = (id: number): CommentGet => {
   if(!id) {
-    //return [];
     throw new Error('Function \'onCommentGet\' isn\'t implemented.');
   }
   return comments;
+};
+
+export const changeNumberFormat = (number: number): string => {
+  if((number % 1) === 0) {
+    return `${number},0`;
+  }
+  return number.toLocaleString();
+};
+
+export const getRatingLevel = (rating: number): RatingLevel => {
+  if(rating === 10) {
+    return RatingLevel.Awesome;
+  }
+  switch(Math.round(rating)) {
+    case 10:
+    case 9:
+    case 8:
+      return RatingLevel.VeryGood;
+    case 7:
+    case 6:
+    case 5:
+      return RatingLevel.Good;
+    case 4:
+    case 3:
+      return RatingLevel.Normal;
+    default:
+      return RatingLevel.Bad;
+  }
 };

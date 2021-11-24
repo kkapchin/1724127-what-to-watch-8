@@ -1,5 +1,6 @@
 import { Tab } from '../../const';
 import { Film } from '../../types/films';
+import { changeNumberFormat, getRatingLevel } from '../../utils';
 
 type OverviewTabProps = {
   film: Film,
@@ -15,9 +16,9 @@ function OverviewTab({ film, activeTab }: OverviewTabProps): JSX.Element | null 
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film.rating}</div>
+        <div className="film-rating__score">{changeNumberFormat(film.rating)}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
+          <span className="film-rating__level">{getRatingLevel(film.rating)}</span>
           <span className="film-rating__count">{`${film.scoresCount} ratings`}</span>
         </p>
       </div>
